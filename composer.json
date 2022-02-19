@@ -1,0 +1,12 @@
+{
+    "name": "emil/mafia_game_api_php",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Emil Gutkiewicz",
+            "email": "emil@bitclude.com"
+        }
+    ],
+    "require": {}
+}
