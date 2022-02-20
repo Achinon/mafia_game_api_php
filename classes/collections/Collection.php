@@ -2,20 +2,18 @@
 
 namespace collections;
 
-use classes\Properties;
+use classes\Tool;
 use classes\Tools;
-use Exception;
 
 abstract class Collection
 {
     readonly string $id;
-    protected object $data;
 
-    /**
-     * @throws Exception
-     */
     public function __construct()
     {
-        $this->id = Tools::generate( Tools::prop(Properties::ID) );
+        $this->id = Tools::get(Tool::idGenerator)->use();
     }
+
+    abstract public function save();
+    abstract public static function get();
 }

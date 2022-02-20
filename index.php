@@ -12,13 +12,12 @@ $classesPath = './classes/';
 include "${classesPath}Import.php";
 
 Import::files($classesPath);
-die();
+
 try {
 
 
     $menu = new Lobby();
 
-    var_dump($menu);
 
 
 
@@ -27,7 +26,6 @@ try {
 
 
 
-
-    Response::send(['cos' => 'tam']);
+//    Response::send(['cos' => 'tam']);
 } catch (Exception $e) { echo $e; }
 

@@ -5,7 +5,7 @@ namespace classes;
 class Import {
     static public function files (string $folder): void
     {
-        foreach (glob("${folder}/*") as $filename)
+        foreach (glob("$folder/*") as $filename)
             self::act($filename);
     }
 

@@ -4,54 +4,19 @@ namespace classes;
 
 use Exception;
 use JetBrains\PhpStorm\Pure;
+use tools\idGen;
 
 class Tools
 {
-    /**
-     * @throws Exception
-     */
-    public static function generate (Prop $prop): mixed
-    {
-        return match ($prop->type) {
-            Properties::ID => self::id($prop->data),
-            default => $prop, //should be grey, if not, you messed up...
-        };
+    private static function idGenerator () {
+
     }
 
-    /**
-     * @throws Exception
-     */
-    private static function id(object $prop) : string
-    {
-        if($prop->type === Properties::ID){
-            $characters = $prop->hex ?
-                '0123456789abcdef':
-                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < $prop->id; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-            return $randomString;
-        }
-        throw new Exception('Illegal prop access');
-    }
-
-    /**
-     * @throws Exception
-     */
-    public static function prop (Properties $property): Prop
+    public static function get (Tool $tool): mixed
     {
-        return match ($property) {
-            Properties::ID => Prop::construct (
-                Properties::ID,
-                new class {
-                    public int $length = 21;
-                    public bool $hex = false;
-                }
-            ),
-            default => throw new Exception('Unknown type of property provided'),  //should be grey, if not, you f'd up...
+        return match ($tool) {
+            Tool::idGenerator => idGen::construct()
         };
     }
 
@@ -62,21 +27,44 @@ class Tools
     }
 }
 
-class Prop {
-    public Properties $type;
-    public object $data;
+enum Tool {
+    case idGenerator;
+}
+
+namespace tools;
+
+use classes\Tool;
+use JetBrains\PhpStorm\Pure;
+
+abstract class ToolProp {
+    public Tool $type;
+    abstract public static function construct ();
+    abstract public function use ();
+}
+
+class idGen extends ToolProp {
+    public int $length = 21;
+    public bool $hex = false;
 
     #[Pure]
-    public static function construct(Properties $property, object $data): Prop
+    public static function construct(): idGen
     {
-        $prop = new self();
-        $prop->type = $property;
-        $prop->data = $data;
-
-        return $prop;
+        $idGen = new self();
+        $idGen->type = Tool::idGenerator;
+        return $idGen;
     }
-}
 
-enum Properties {
-    case ID;
-}
+    public function use() : string
+    {
+        $characters = $this->hex ?
+            '0123456789abcdef':
+            '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $this->length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+};
