@@ -11,9 +11,12 @@ abstract class Collection
 
     public function __construct()
     {
-        $this->id = Tools::get(Tool::idGenerator)->use();
+        $generator = Tools::get(Tool::idGenerator);
+        $generator->length = 5;
+
+        $this->id = $generator->use();
     }
 
     abstract public function save();
-    abstract public static function get();
+    abstract public static function get(string $id);
 }
