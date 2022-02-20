@@ -1,8 +1,26 @@
 <?php
 
-$test = new class {
-    public int $length = 21;
-    public bool $hex = false;
-};
+//var_dump(!(false | false));
+echo '&& - and ' . PHP_EOL;
+var_dump((0 && 0));
+var_dump((0 && 1));
+var_dump((1 && 0));
+var_dump((1 && 1));
 
-var_dump($test);
+echo '& - and ' . PHP_EOL;
+var_dump((0 & 0));
+var_dump((0 & 1));
+var_dump((1 & 0));
+var_dump((1 & 1));
+
+echo '|| - or' . PHP_EOL;
+var_dump((0 || 0));
+var_dump((0 || 1));
+var_dump((1 || 0));
+var_dump((1 || 1));
+
+echo '| - or' . PHP_EOL;
+var_dump((0 | 0));
+var_dump((0 | 1));
+var_dump((1 | 0));
+var_dump((1 | 1));

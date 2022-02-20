@@ -54,6 +54,12 @@ class Tools
             default => throw new Exception('Unknown type of property provided'),  //should be grey, if not, you f'd up...
         };
     }
+
+    static public function php () {
+        echo '<pre>';
+        var_dump($_SERVER);
+        echo '</pre>';
+    }
 }
 
 class Prop {

@@ -3,15 +3,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-use classes\Importer;
+use classes\Import;
 use classes\Request;
-use classes\Returner;
+use classes\Response;
 use collections\Lobby;
 
-include './classes/Importer.php';
+$classesPath = './classes/';
+include "${classesPath}Import.php";
 
-Importer::importClasses();
-
+Import::files($classesPath);
+die();
 try {
 
 
@@ -27,6 +28,6 @@ try {
 
 
 
-    Returner::respond(['cos' => 'tam']);
+    Response::send(['cos' => 'tam']);
 } catch (Exception $e) { echo $e; }
 
