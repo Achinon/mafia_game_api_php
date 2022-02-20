@@ -6,11 +6,27 @@ error_reporting(E_ALL);
 use classes\Importer;
 use classes\Request;
 use classes\Returner;
+use collections\Lobby;
 
 include './classes/Importer.php';
-//phpinfo();
+
 Importer::importClasses();
 
 try {
+
+
+    $menu = new Lobby();
+
+    var_dump($menu);
+
+
+
+
+
+
+
+
+
     Returner::respond(['cos' => 'tam']);
 } catch (Exception $e) { echo $e; }
+
