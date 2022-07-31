@@ -18,21 +18,12 @@ class Import {
             'folder' => self::isFolder($filename)
         ];
 
-//        self::debug($a, $filename);
-
         if(!($a['ignored'] | $a['hidden'])){
             if($a['php'])
-                include $filename;
+                include_once $filename;
             elseif($a['folder'])
                 self::files($filename);
         }
-    }
-
-    private static function debug ($a, $filename): void
-    {
-        echo $filename . PHP_EOL;
-        var_dump($a);
-        echo PHP_EOL;
     }
 
     private static function getCleanFilename (string $filename): string
@@ -56,7 +47,6 @@ class Import {
     {
         $firstChar = $filename[0];
         $secondChar = $filename[1];
-
         return $firstChar === '.' && $firstChar.$secondChar !== './';
     }
 
@@ -64,8 +54,10 @@ class Import {
     {
         $filenamesToIgnore = [
             "index.php",
-            "Import.php"
+            "Import.php",
+            ".env"
         ];
+
         return in_array(self::getCleanFilename($filename), $filenamesToIgnore);
     }
 }

@@ -28,9 +28,15 @@ class Request
         'get' => RequestType::GET,
         'post' => RequestType::POST,
     ];
+
+    
 }
 
 enum RequestType {
     case GET;
     case POST;
+}
+
+interface RequestTypeInteface {
+    public function getPath();
 }
